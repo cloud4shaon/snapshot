@@ -1,20 +1,4 @@
-﻿<#
-.SYNOPSIS
-    Helper functions for AzureSnapFunctions.ps1
-.NOTES
-    File Name      : AzureStorageFunctions.ps1
-    Author         : Dave Hall
-    Prerequisite   : PowerShell V5 (Tested, may work in earlier)
-                     AzureRM Powershell Module
-    Copyright 2016 - Dave Hall
-.LINK
-    http://superautomation.blogspot.com
-.EXAMPLE
-    Example 1
-.EXAMPLE
-    Example 2
-#>
-
+﻿
 Function Get-StorageTable {
   Param(
     [Parameter(Mandatory=$true)]$TableName,

@@ -1,25 +1,18 @@
-﻿<#
-.SYNOPSIS
-    A set of functions to create, delete or revert to a snapshot of an Azure RM VM
-.DESCRIPTION
-    A detailed description of the function or script. This keyword can be
-    used only once in each topic.
-.NOTES
-    File Name      : AzureSnapFunctions.ps1
-    Author         : Dave Hall
-    Prerequisite   : PowerShell V5 (Tested with V5, may work in earlier)
-                     AzureRM Powershell Module (Install-Module AzureRM)
-    Copyright 2016 - Dave Hall
-.LINK
-    http://superautomation.blogspot.com
-.EXAMPLE
-    Example 1
-.EXAMPLE
-    Example 2
-#>
-
-Import-Module AzureRM
+﻿Import-Module AzureRM
 #Login-AzureRMAccount
+#Non-Interactive Login to Azure
+Function LogMeIn
+{
+    Param(
+        [Parameter(Mandatory=$true)]$subscriptionname,
+        [Parameter(Mandatory=$true)]$accountName,
+        [Parameter(Mandatory=$true)]$password     
+        )
+$securePassword = ConvertTo-SecureString $password -AsPlainText -Force
+$psCred = New-Object System.Management.Automation.PSCredential($accountName, $securePassword)
+Login-AzureRmAccount -Credential $psCred
+Set-AzureRMContext -SubscriptionName $subscriptionName
+}
 . "$($PSScriptRoot)\AzureStorageFunctions.PS1"
 
 Function New-AzureRmVmSnap {
@@ -30,10 +23,10 @@ Function New-AzureRmVmSnap {
         [switch]$Force=$False
     )
 	
-	Write-Host "Create Snapshot for VM: " -ForegroundColor Yellow -NoNewline
+	Write-Host "Create Snapshot for VM: " -ForegroundColor Yellow -NoNewline 
 	Write-Host $VMName -ForegroundColor Cyan
     
-	$VM = Get-AzureRmVm | Where-Object {$_.Name -eq $VMName}
+	$VM = Get-AzureRmVM | Where-Object {$_.Name -eq $VMName}
 	if ($VM) {
          
         #Warn if VM OS disk is on Premium storage and break

@@ -5,6 +5,11 @@ VisualStudioVersion = 15.0.26430.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "VMSnapshots", "VMSnapshots.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{93B69C1A-25E4-4FCB-949A-24AA8CF0104F}"
+	ProjectSection(SolutionItems) = preProject
+		Read Me.md = Read Me.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
